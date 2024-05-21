@@ -1,0 +1,114 @@
+Though it is an easy problem 
+
+There are 3 types of problems coexist in it -
+
+1. Merge two sorted array in a new array -- Solution - Simple 2 pointer moving and an new array
+2. Merge two sorrted arrray in array1 as array1 is of M+N length - Sort from end( from bigger numbers )
+3. Sort array in same arr1 and arr2 but do not merge them - 
+
+    2 solution -    
+            1. take the first element of right list and last element of left list -> if in element on left> element on right - swap and in the end sort both the array and return both - Tc-O(logN)+ O(logM)+ O(min(l1,l2));
+
+            2. Using gap Method 
+                    Maintain an gap between left and right pointer gap - ceil of (l1+l2)/2 now keep on moving both and swapping if nesscery till right < rightlist length, in next iteration do gap/2 keep doing till gap!=0 in the end return both of them thats it 
+                    Tc-O((N+M)*log(M+N))
+
+Soltuions
+1. Using two pointers on i and j at start of both the arrays and move and add element in new arrays
+2. Using inplace
+
+
+----- Basic code -----
+Q-1 
+
+
+public int[] merged ( int[] arr1, int m, int[] arr2, int n){
+
+    int[] ans = new int[m+n];
+    int i=0;
+    int j=0;
+    int k=0;
+    while(i<m&&j<n){
+        if(arr1[i]<=arr2[j])
+        ans[k++]=arr1[i++];
+        else
+        ans[k++]=arr2[j++];
+    }
+    while(i<m)
+    ans[k++]=arr1[i++];
+    while(j<n)
+    ans[k++]=arr2[j++];
+    return ans;
+}
+
+
+// Q-3-> Merge sorted array in arr1 and arr2 but do not return new arr of m+n size()
+
+arr1 = [5,8.10,24,39]
+arr2 = [0,2,4,6,8,12,45,78]
+
+final output should be 
+-> arr1 = [0,2,4,5,6]
+-> arr2 = [8,8,10,12,24,39,45,78]      
+
+Soution 1 - Brute force -> same solution as Q-1 just put values in arr1 and arr2 in the end() - Tc- O(M+N) Sc- O(M+N) // that is the issue
+
+Soution 2 - Using the fact that left arr will have small element than right so whenever there is an ele>eleright in left do a swap thats it in the end sort them using Arrays.sort()
+
+
+public void merge(int[] arr1, int m, int[] arr2, int n){
+
+    int left = m-1;
+    int right = 0;
+
+    while(left>=0 && right <n){
+        if(arr1[left>arr2[right]])
+        {
+            int temp = arr1[left];
+            arr1[left]=arr2[right];
+            arr2[right]= temp;
+            left--;
+            right++;
+        }
+        else
+        break;
+    }
+    Arrays.sort(arr1);
+    Arrays.sort(arr2);
+}
+Tc- O(MlogM)+O(NlogN)+O(min(m,n))
+SC -O(1)
+
+
+Solution 3 -
+
+public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+    int left =m;
+    int right= n;
+    int len = m+n;
+    int gap = (len)/2 + len%2;
+
+    while(gap>0){
+        left = 0;
+        right = left+gap;
+        while(right<len){
+            if(left<m && right>=m){
+                swap(nums1,nums2,left,right-m);
+            }
+            else if(left>=m)
+            swap(nums2,nums2, left-m,right-m);
+            else
+            {swap(nums1,nums1,left,right);
+            }
+            left++;
+            right++;
+        }
+        if(gap==1)break;
+
+        gap = gap/2+gap%2;
+    }
+}
+
+
+
