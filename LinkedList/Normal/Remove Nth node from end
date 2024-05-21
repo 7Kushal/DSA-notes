@@ -1,0 +1,9 @@
+Brute ->  you can find length of the linked list and then move from head less then N and unlink it 
+Best/Better -> using tortoise and hair algo.  
+
+How ? 
+        Assume an temp pointer and move it till N times 
+        Now Take one more pointer start = head
+        Move both the pointer till temp reaches null -> now temp will reach null exaclty after L - N moves that means We
+        can now delete start node 
+        TC - > O(N) SC - O(constant)

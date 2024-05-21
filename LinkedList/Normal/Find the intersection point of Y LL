@@ -1,0 +1,7 @@
+Better -> Finding length of both the ll and then starting from the next start point for larger ll
+Best/Optimal ->Using tortoise algorithm ->
+    
+    How ? 
+    1.Start from the head of both the linked list 
+    2.if any pointer reached null -> swap them and start again 
+    3.if at any point both reached null -> no intersaction else they will collide and return the answer

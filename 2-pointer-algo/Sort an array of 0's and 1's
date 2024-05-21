@@ -1,0 +1,27 @@
+Brute force 
+- Arrays.sort() - TC- O(NlogN)
+- Any normal sort 
+- count 0 and 1's
+
+
+Optimal approach - 
+
+Using 2 pointer - 
+
+input - [0,0,1,0,1,0,0,0,1,0,1,1]
+
+pointer L at 0; 
+pointer R at 0;
+
+for(int R =0 ; R < size;R++){
+    if(nums[R]==0){
+       int temp = nums[R];
+       nums[R] = nums[L];
+       nums[L] = temp;
+       L++;
+    }
+}
+
+
+Tc- O(N)
+best in one inplace

@@ -1,0 +1,39 @@
+https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/?envType=study-plan-v2&envId=top-interview-150
+
+--
+I was able to guess the algorithm, but took time in sort out edge cases -> do a dry run on example once
+
+public ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode curr = head;
+        ListNode currNext = head.next;
+        ListNode prev = new ListNode(-1);
+        ListNode ans = null;
+        boolean test = false;
+        prev.next= head;o
+        while(currNext!=null){
+            if(test==false && currNext.val!=curr.val){
+                    ans = curr;
+                    test=true;
+            }
+            if(currNext.val==curr.val){
+            while(currNext!=null && currNext.val==curr.val){
+
+                currNext = currNext.next;
+                // curr=curr.next;
+                prev.next = currNext;
+            }
+            curr=currNext;
+            if(curr==null)break;
+            currNext=curr.next;
+            }
+            else
+            {
+            prev=curr;
+            curr=prev.next;
+            currNext=curr.next;
+            }
+        }
+        if(ans==null)return prev.next;
+        return ans;
+    }

@@ -1,0 +1,28 @@
+Reverse a linked list
+
+--We have 3 approach to solve it 
+
+1. 
+Brute force -> Take an array and add all elements of linked list and reverse the order and form an new linked list and return the head of new 
+
+TC = O(N), SC = O(N)
+
+2
+Reversing in place -> Take three dumy nodes prev, curr, post and try to shift nodes in place 
+
+TC = O(N), SC = o(N)
+
+3
+Reversing using recusrsion 
+Simple but same TC as in place 
+
+public ListNode recursion(ListNode head){
+        // if(head==null)return null;
+        if(head.next==null)return head;
+        ListNode end = recursion(head.next);
+        // recursion(head.next).next = head;
+        ListNode front = head.next;
+        front.next=head;
+        head.next = null;
+        return end;
+    }

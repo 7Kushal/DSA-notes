@@ -1,0 +1,24 @@
+// I was able to solve in first go
+
+// 3 Solutions 
+// 1. O(N2) - Use 2 loops
+// 2. Sort the array and use 2 pointers  - O(Nlogn) + o(N)
+// 2. Use HashMap - o(N) as map retrivals are O(1) in unsorted map
+
+
+// Map Solution its the best optimal 
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // int[] ans = new int[2];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int x = target - nums[i];
+            if(map.containsKey(x)){
+                return new int[]{map.get(x),i};
+            }
+            map.put(nums[i],i);
+        }
+        return new int[2];
+    }
+}
