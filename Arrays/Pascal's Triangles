@@ -1,0 +1,102 @@
+ There are 3 types of problem in pascals traingle 
+
+ 1. Print the element at R row and C column 
+ 2. Print the entire ROW 
+ 3. Print the whole Pascal Tree 
+
+
+ Solutions - 
+
+        Thought process -> See pascal triangle each row has palindromic data so we can relate with 
+
+                Nc0, Nc1, Nc2, Nc3, Nc4 ----- NcN
+
+            This can be relate to row data 
+
+1                    1
+2                1       1
+3            1       2       1
+4        1       3       3       1
+5    1       4       6       4       1  ---> lets say we need to find element from this row so R= 5 and Column =3 
+
+Soultion to Problem 1 - 
+
+Element will be 
+                    R-1
+                        C   
+                         C-1
+        
+        5-1 = 4
+            C
+             3-1 = 2
+
+             4c2 =  4*3*2*1 = 24 == 6 which is correct 
+                    2*1*2*1 = 4
+
+            Lets say this function is 
+            
+            int ncr(int r, int c){
+                int res = 1;
+                for(int i=1;i<r;i++)
+                res=res*i;
+                for(int i=1;i<c;i++)
+                res=res/i;
+                for(int i=1;i<=r-c;i++)
+                res=res/i;
+                return res;
+            }
+
+    Now we can optimize it as well -- as ncr = !n / (!r*!(n-r)); ==  if r is 2 we can say 4*3*2*1/2*1*2*1 == so 2*1 will always cancel the upper numbers 
+    so we can say what actually matter is - > 4*3/2*1;
+
+    int ncr(int r, int c){
+        int res= 1;
+        for(int i=1;i<r;i++){
+            res = res*(r-i);
+            res = res/i;
+        }
+        return res;
+    }
+
+
+Solution to problem 2 - 
+
+Print the Row 
+                    Naive Solution - 
+                    
+                    for(int i=1;i<=R;i++) // as we have 5 element if R = 5 
+                    {
+                        System.out.print(ncr(R,i)+" ");
+                    }
+
+        Time complexity = O(R*R)== O(R2)
+
+                    Better Solution -
+
+--------------Now see 
+
+Row 5 have data =        1    4    6       4            1
+ 
+Can be wriitem as --     1    1*4  1*4*3   1*4*3*2      1*4*3*2*1
+                                1    1*2     1*2*3        1*2*3*4
+
+                         res       
+
+                            res*4/1 res*3/2 res*2/3      res*1/4
+
+            int res=1;
+
+            for(int i=1;i<=R;i++){
+                res = res*(R-i);
+                res = res/(i);
+                System.out.print(res+" ");
+            }
+
+
+Q-3 Print the whole pascals triangle 
+
+so we can do using the Q-2 just run it for each row 
+
+Tc- O(R*R) = O(R2) thats the best we can have 
+
+
