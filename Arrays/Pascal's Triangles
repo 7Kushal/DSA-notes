@@ -1,3 +1,4 @@
+https://leetcode.com/problems/pascals-triangle/
  There are 3 types of problem in pascals traingle 
 
  1. Print the element at R row and C column 
@@ -100,3 +101,29 @@ so we can do using the Q-2 just run it for each row
 Tc- O(R*R) = O(R2) thats the best we can have 
 
 
+
+LeetCode Solution - 
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for(int i=1;i<=numRows;i++){
+            ans.add(rowdata(i));
+        }
+        return ans;
+
+    }
+    public List<Integer> rowdata ( int R){
+        int res =1;
+        List<Integer> ans = new ArrayList<>();
+        ans.add(res);
+        for(int i=1;i<R;i++){
+            res=res*(R-i);
+            res=res/i;
+            ans.add(res);
+        }
+        return ans;
+    }
+}
