@@ -1,0 +1,34 @@
+  
+public ListNode reverseKGroup(ListNode head, int k) {
+        
+        ListNode tempp= head;int size=0;
+        while(tempp!=null){tempp=tempp.next;size++;}
+    
+        ListNode prev = new ListNode(-1);
+        ListNode ans = prev;
+        prev.next= head;
+        ListNode start = head;
+        for(int i=0;i<size/k;i++){
+    
+            ListNode revereshead= reverse(start,k);
+            prev.next=revereshead;
+            prev=start;
+            start = start.next;
+        }
+        return ans.next;
+    }
+    
+public ListNode reverse(ListNode head, int k){
+        ListNode temp = head;
+        ListNode prev = null;
+        ListNode curr= head;
+        // System.out.println(curr.val);
+        for(int i=0;i<k;i++){
+            temp=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        head.next = temp;
+        return prev;
+}
