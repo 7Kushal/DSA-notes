@@ -1,0 +1,34 @@
+https://leetcode.com/problems/longest-consecutive-sequence/
+
+Category - Medium 
+Aproach -> The question is simple there are 3 ways in which it can be solved 
+1. brute force - > O(N*N) approach 
+2. Better Code - > O(Nlogn)+O(N)
+3. optimal code- > O(N), SC - O(N) using set
+
+-> optimal solution
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int ans =0;
+        int currlength=0;
+        int lastEle = Integer.MIN_VALUE;
+        int n = nums.length;
+
+        Set<Integer> set = new HashSet<>();
+        for(int i=0;i<n;i++)
+        set.add(nums[i]);
+
+        for(int i=0;i<n;i++){
+            int x = nums[i];
+            if(!set.contains(x-1)){
+                currlength =1;
+                while(set.contains(x+1)){
+                    currlength++;
+                    x=x+1;
+                }
+                ans = Math.max(ans,currlength);
+            }
+        }
+        return ans;
+    }
+}
