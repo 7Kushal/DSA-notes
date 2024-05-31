@@ -1,0 +1,51 @@
+https://leetcode.com/problems/subsets/
+
+// Using recusion 
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        // List<Integer> temp = new ArrayList<>();
+        return subset(ans,0,nums,new ArrayList<>());
+    }
+    public List<List<Integer>> subset(List<List<Integer>> ans, int i,int[] nums, ArrayList<Integer> temp){
+
+        if(i>=nums.length){
+            ans.add(new ArrayList<>(temp));
+            return ans;
+        }
+        temp.add(nums[i]);
+        subset(ans,i+1,nums,temp);
+        temp.remove(temp.size()-1);
+        subset(ans,i+1,nums,temp);
+        return ans;
+    }
+}
+
+//using bit 
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        // List<Integer> temp = new ArrayList<>();
+        //using bits
+
+        int nbits = nums.length;
+        int comb = (int)Math.pow(2,nbits);
+        // System.out.println(comb);
+        // List<Integer> temp = new ArrayList<>();
+        int k=nbits-1;
+        for(int i = 0;i<comb;i++){
+            int ct=i;
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int j=nbits-1;j>=0;j--){
+                if((ct&1)==1)
+                temp.add(nums[j]);
+                ct>>=1;
+            }
+            ans.add(temp);
+            // temp.clear();
+        } 
+    return ans;
+    }
+}

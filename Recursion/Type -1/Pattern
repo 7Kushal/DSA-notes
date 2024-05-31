@@ -1,0 +1,14 @@
+Patttern in these type of problem is 2 steps
+
+1. Take and Non take 
+2. Store the data in temp array when taken and remove when not taken 
+
+-->
+
+Problems 
+1. Subset I
+2. Subset II -- Here to remove duplicates sort the array first and then remove using while loop
+3. Combination I
+4. Combination II -- Here to remove duplicates sort the array first and then remove using while loop
+5. Palindrome Partioning -- Good Question
+

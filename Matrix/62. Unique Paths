@@ -1,0 +1,50 @@
+https://leetcode.com/problems/unique-paths/
+
+// Brute force using DP
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] visited = new int[m+1][n+1];
+        return paths(m-1,n-1,visited);
+    }
+
+    public int paths(int m, int n, int[][] visited){
+
+        if(m<0 || n <0 )return 0;
+        if(m==0 && n==0)return 1;
+        if(visited[m][n]!=0)
+        return visited[m][n];
+        return visited[m][n]=(paths(m-1,n,visited)+paths(m,n-1,visited));
+
+    }
+}
+
+// Optimal using combinations 
+
+so for lets say m = 3, n = 2
+
+total steps are 
+
+R R D
+D R R
+R D R
+
+which is equal to m+n -2 = 3 
+
+so total no of combinations are 
+                                m+n-2            OR   m+n-2
+                                    C                       C
+                                     m-1                      n-1
+
+
+                                     class Solution {
+                                        public int uniquePaths(int m, int n) {
+                                            int N = m+n-2;
+                                            int R = m-1;
+                                            double res = 1;
+                                            for(int i=1;i<=R;i++){
+                                                res = res*(N-R+i)/i;
+                                            }
+                                            return (int)res;
+                                        }
+                                    }
