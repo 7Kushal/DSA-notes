@@ -9,7 +9,7 @@ class Solution {
     }
     public void recurse(List<List<Integer>> ans, ArrayList<Integer> temp, int index, int n,int[] nums){
 
-        if(index==n){
+        if(index==n){   
             ans.add(new ArrayList<>(temp));
             return;
         }

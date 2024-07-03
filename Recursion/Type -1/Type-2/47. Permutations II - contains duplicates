@@ -1,0 +1,35 @@
+https://leetcode.com/problems/permutations-ii/
+
+
+// Using HashMap
+
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        int n
+         = nums.length;
+        for(int i=0;i<n;i++)
+        map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+   
+        recurse(ans,new ArrayList<>(), n , map);
+        return ans;
+
+    }
+
+    public void recurse(List<List<Integer>> ans,ArrayList<Integer> temp, int n , HashMap<Integer,Integer> map){
+        if(temp.size()==n){
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        for(Integer key : map.keySet()){
+            if(map.get(key)>0){
+                temp.add(key);
+                map.put(key,map.get(key)-1);
+                recurse(ans,temp,n,map);
+                temp.remove(temp.size()-1);
+                map.put(key,map.get(key)+1);
+            }
+        }
+    }
+}
